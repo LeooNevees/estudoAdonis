@@ -1,0 +1,92 @@
+/cep/{cep}:
+  get:
+    tags:
+      - CEP
+    security: []
+    description: End-point responsável por obter as informações de um CEP.
+    parameters:
+        - in: path
+          name: cep
+          schema:
+            type: integer
+          required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: boolean
+                data:
+                  type: object
+
+/cep:
+  post:
+    tags:
+      - CEP
+    security: []
+    description: End-point responsável por cadastrar um endereço.
+    parameters:
+      - name: params
+        in:  body
+        required: true
+        schema:
+          properties:
+            cep:
+              type: string
+              required: true
+            logradouro:
+              type: string
+              required: true
+            complemento:
+              type: string
+              required: true
+            bairro:
+              type: string
+              required: true
+            localidade:
+              type: string
+              required: true
+            uf:
+              type: string
+              required: true
+            ibge:
+              type: string
+              required: true
+            gia:
+              type: string
+              required: true
+            ddd:
+              type: string
+              required: true
+            siafi:
+              type: string
+              required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Dados Salvos com sucesso
+
+/cep/{id}:
+  delete:
+    tags:
+      - CEP
+    security: []
+    description: End-point responsável por remover um endereço cadastrado.
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Dados removidos com sucesso

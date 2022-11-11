@@ -1,0 +1,31 @@
+/lang/{locale}/{page}:
+  get:
+    tags:
+      - Lang
+    security: []
+    description: End-point responsável por obter os dados de uma lang.
+    parameters:
+        - in: path
+          name: locale
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: page
+          schema:
+            type: string
+          required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: boolean
+                data:
+                  type: object
