@@ -18,7 +18,10 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route from '@ioc:Adonis/Core/Route';
 
-Route.get('/:cep', 'CepsController.index')
-Route.post('/', 'CepsController.add')
+Route.get('/cep/:cep', 'CepController.index');
+Route.post('/cep', 'CepController.add');
+Route.delete('/cep/:id', 'CepController.remove');
+
+Route.get('/lang/:locale/:page', 'LangController.get');

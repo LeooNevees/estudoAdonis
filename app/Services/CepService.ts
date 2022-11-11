@@ -4,17 +4,17 @@ import { ValidateService } from "./ValidateService";
 
 const axios = require('axios');
 
-export default class CepsServices {
+export default class CepService {
 
     public async index(params: ICepReceiving) {
         try {
-
             let cep = await ValidateService.removeSpecialCharacter(params.cep);
             let res = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
             let ret: ICepSending = res.data;
 
             return { error: false, data: ret };
         } catch (error) {
+            console.log(error);
             return { error: true, message: error.message};
         }
     }
@@ -38,6 +38,22 @@ export default class CepsServices {
             }
             
             return { error: false, message: 'Dados Salvos com sucesso' };
+        } catch (error) {
+            return { error: true, message: error.message};
+        }
+    }
+
+    public async remove(params: ICepReceiving) {
+        try {
+            let id = params.id;
+            const getAddress = await Address.findBy('id', id);
+            if(!getAddress) {
+                throw new Error("Esse CEP ainda não foi cadastrado na base");
+            }
+
+            getAddress.delete();
+
+            return { error: false, message: 'Dados removidos com sucesso' };
         } catch (error) {
             return { error: true, message: error.message};
         }
